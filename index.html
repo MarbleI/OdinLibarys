@@ -15,18 +15,21 @@
     </header>
     <main id="main">
         <div id="book">
-            <form action="#" id="form" method="post" name="form">
-            <p>Add A Book!</p>
-            <hr>
-            <input id="title1" name="title1" placeholder="Title" type="text">
-            <input id="author1" name="author1" placeholder="Author" type="text">
-            <input id="pages1" name="pages1" placeholder="Pages" type="text">
-            <div class="isRead">
-                <label for="isRead">Have you read it?</label>
-                <input class="checkbox" type="checkbox" id="isRead">
-            </div>
-            <button id="submit" type="submit">Submit</button>            
-        </form>
+            <form action="index.html" id="form" method="post" name="form">
+                <p>Add A Book!</p>
+                <hr>
+                <label for="title1">Title:</label>
+                <input id="title1" name="title" placeholder="Hobbit" type="text" minlength="3">
+                <label for="author1">Author:</label>
+                <input id="author1" name="author" placeholder="J-Sas" type="text" minlength="3">
+                <label for="pages1">Page #:</label>
+                <input id="pages1" name="pages" placeholder="120" type="number" minlength="1">
+                <div class="isRead">
+                    <label>Have you read it?</label>
+                    <input type="checkbox" id="isRead1" name="isRead1">
+                </div>
+                <button type='button' id="submits">Submit</button> 
+            </form>
         </div>
     </main>
     <footer id="footer">

@@ -1,19 +1,23 @@
 const main = document.getElementById('main');
-const submitButton = document.getElementById('submit');
-submitButton.addEventListener('click', this.textContent = '5');
+const submitButton = document.querySelector('#submits');
+const title1 = document.getElementById("title1");
+const author1 = document.querySelector("#author1");
+const pages1 = document.querySelector("#pages1");
+const isRead1 = document.querySelector("#isRead1");
 
 
 function books(title, author, pages, isRead) {
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.isRead = isRead
+    return {
+        title,
+        author,
+        pages,
+        isRead,
+    }
 };
-
-const hobbit = new books("Hobit", "Piecies", "120", true);
-const robbit = new books("robbit and the stone", "Piecies", "324323", false);
-
-console.log(hobbit.title)
+const hobb = new books('hoblet', 'pierce', 234, true);
+const zeertdfs = new books('Trent and the stne', 'pierce', 3245, false);
+makeTile(hobb);
+makeTile(zeertdfs);
 function makeDiv () {
     const div = document.createElement('div');
     div.setAttribute('id', 'book');
@@ -38,7 +42,7 @@ function makeAuthor (div, book) {
 function makePages (div, book) {
     const pages = document.createElement('p');
     pages.setAttribute('id', 'pages');
-    pages.textContent = `${book.pages} pages`;
+    pages.textContent = `Pages: ${book.pages}`;
     div.appendChild(pages);
     return pages;
 };
@@ -52,6 +56,19 @@ function makeIsRead (div, book) {
         isRead.textContent = `Mark as read`
         div.classList.add('hasNotRead');
     }
+    isRead.addEventListener(`click`, (event) => {
+        if (book.isRead) {
+            isRead.textContent = `Mark as read`
+            book.isRead = false
+            div.classList.add('hasNotRead');
+            div.classList.remove('hasRead');
+        } else {
+            isRead.textContent = `Mark as not read`
+            book.isRead = true
+            div.classList.add('hasRead');
+            div.classList.remove('hasNotRead');
+        }
+     })
     div.appendChild(isRead);
     return isRead;
 };
@@ -59,16 +76,34 @@ function makeEdit(div, book) {
     const edit = document.createElement('button')
     edit.setAttribute('id', 'edit'); 
     edit.textContent = `Edit`
+    edit.addEventListener('click', (event) => {
+        savestate();
+        div.remove();
+    })
     div.appendChild(edit);
     return edit;
 };
-function makeTile (book) {
-    const div = makeDiv();
+function makeTile(book) {
+    const div = makeDiv()
     const title = makeTitle(div, book)
-    const author = makeAuthor(div, book);
-    const pages = makePages(div, book);
-    const isRead = makeIsRead(div, book);
-    const edit = makeEdit(div, book);
+    const author = makeAuthor(div, book)
+    const pages = makePages(div, book)
+    const isRead = makeIsRead(div, book)
+    const edit = makeEdit(div, book)
 }
-makeTile(hobbit);
-makeTile(robbit);
+function reset (){
+    title1.value = "";
+    author1.value = "";
+    pages1.value = "";
+    isRead1.checked = false;
+}
+function savestate (div, book) {
+    title1.value = title.textContent;
+    author1.value = author.textContent;
+    pages1.value = pages.textContent;
+}
+submitButton.addEventListener(`click`, (event) => {
+    const book = new books(title1.value, author1.value, pages1.value, isRead1.checked);
+    makeTile(book);
+    reset();
+ })
