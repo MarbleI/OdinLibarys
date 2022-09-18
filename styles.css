@@ -1,64 +1,66 @@
 body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 5vh;
-}
-header, main, footer {
-    align-items: stretch;
-    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    min-height: 100vh;  
     min-width: 100vh;
+    gap: 50px;
+    margin: 0px;
+    padding: 0px;
+}
+header, footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: #2c2b30;
+    color: white;
 }
 header {
     position: sticky;
-    top:  0px;
-    background-color: aqua;
-    display: flex;
+    top: 0px;
+}
+footer {
+    padding: 10px;
+    color: white;
+}
+a { color: inherit; } 
+h1 {
+    margin: 10px;
 }
 main {
-    display: grid;
-    grid-template-columns: 250px 250px 250px;
-    grid-template-rows: 250px 250px;
-    grid-auto-rows: 250px;
-    gap: 50px;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
 }
+table {
+    width: 80%;
+    max-height: 0px;
+    border-collapse: collapse;
+    border: 3px solid black;
+}
+
+td, th {
+    border: 2px solid black;
+    padding: 10px;
+}
+button {
+    margin: 0px;
+    padding: 0px;
+    height: 25px;
+    width: 100%;
+}
+
 .hasRead {
     background-color: lightgreen;
 }
-.hasNotRead {
+.notRead {
     background-color: lightsalmon;
 }
-#book {
-    border: 5px;
-    border-style: solid;
-    border-radius: 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    text-align: center;
-    overflow: auto; /* 1. overflow not `visible` */
-
-}
-#button {
-    height: 250px;
-    width: 250px;
-    border-radius: 25px;
-}
-#isRead, #edit {
-    background-color:antiquewhite;
-    width: 150px;
-    border-radius: 25px;
-}
-#title {
-    font-size: 25px;
-}
-footer {
-    display: flex;
-    background-color: aqua;
-    height: 2.5rem; 
+input {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
 }
