@@ -5,35 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="script.js" defer></script>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <style> tr:nth-of-type(odd) {background-color:#ccc; }</style>
 </head>
 <body>
-    <header id="header">
-        <h1>Libary</h1>
-        <p>login</p>
+    <header>
+        <h1>MarbleI's Library Project</h1>
     </header>
-    <main id="main">
-        <div id="book">
-            <form action="index.html" id="form" method="post" name="form">
-                <p>Add A Book!</p>
-                <hr>
-                <label for="title1">Title:</label>
-                <input id="title1" name="title" placeholder="Hobbit" type="text" minlength="3">
-                <label for="author1">Author:</label>
-                <input id="author1" name="author" placeholder="J-Sas" type="text" minlength="3">
-                <label for="pages1">Page #:</label>
-                <input id="pages1" name="pages" placeholder="120" type="number" minlength="1">
-                <div class="isRead">
-                    <label>Have you read it?</label>
-                    <input type="checkbox" id="isRead1" name="isRead1">
-                </div>
-                <button type='button' id="submits">Submit</button> 
-            </form>
-        </div>
+    <main>
+        <table id="table">
+            <tr>
+                <th scope="col1">Index</th>
+                <th scope="col">Book Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Pages</th>
+                <th scope="col">Read?</th>
+                <th scope="col">Edit</th>
+            </tr>
+            <tr id="new">
+                <td scope="row">0</td>
+                <td ><input id="title" type="text"></td>
+                <td ><input id="author" type="text"></td>
+                <td ><input id="pages" type="number"></td>
+                <td ><input id="isRead" type="checkbox"></td>
+                <td class="edit"><input id="submit" type="submit"></td>
+            </tr>
+        </table>
     </main>
-    <footer id="footer">
-        <p>Made by: <a href="https://github.com/MarbleI">MarbleI</a> 2022</p>
+    <footer>
+        <a target=”_blank” href="https://github.com/MarbleI">Project made by MarbleI</a>
     </footer>
 </body>
 </html>
