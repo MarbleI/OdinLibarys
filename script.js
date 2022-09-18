@@ -1,109 +1,136 @@
-const main = document.getElementById('main');
-const submitButton = document.querySelector('#submits');
-const title1 = document.getElementById("title1");
-const author1 = document.querySelector("#author1");
-const pages1 = document.querySelector("#pages1");
-const isRead1 = document.querySelector("#isRead1");
+const table = document.getElementById('table'); 
+const nTitle = document.getElementById('title')
+const nAuthor = document.getElementById('author')
+const nPages = document.getElementById('pages')
+const nRead = document.getElementById('isRead')
+const submitButton = document.getElementById('submit')
 
+let myLibrary = []
+const hobbit = new book("The Hobbit", "friendly", 256, false)
+const yourmom = new book("Your mom", "me", 901, true)
+const interesting = new book("Interesting", "Don Oliver", 289, false)
+myLibrary.push(hobbit)
+myLibrary.push(yourmom)
+myLibrary.push(interesting)
 
-function books(title, author, pages, isRead) {
-    return {
-        title,
-        author,
-        pages,
-        isRead,
-    }
-};
-const hobb = new books('hoblet', 'pierce', 234, true);
-const zeertdfs = new books('Trent and the stne', 'pierce', 3245, false);
-makeTile(hobb);
-makeTile(zeertdfs);
-function makeDiv () {
-    const div = document.createElement('div');
-    div.setAttribute('id', 'book');
-    main.appendChild(div);
-    return div;
-};
-
-function makeTitle (div, book) {
-    const title = document.createElement('p');
-    title.setAttribute('id', 'title');
-    title.textContent = `Title:\n${book.title}`;
-    div.appendChild(title);
-    return title;
-};
-function makeAuthor (div, book) {
-    const author = document.createElement('p');
-    author.setAttribute('id', 'author');
-    author.textContent = `Author:\n${book.author}`;
-    div.appendChild(author);
-    return author;
-};
-function makePages (div, book) {
-    const pages = document.createElement('p');
-    pages.setAttribute('id', 'pages');
-    pages.textContent = `Pages: ${book.pages}`;
-    div.appendChild(pages);
-    return pages;
-};
-function makeIsRead (div, book) {
-    const isRead = document.createElement('button');
-    isRead.setAttribute('id', 'isRead');
-    if (book.isRead) {
-        isRead.textContent = `Mark as not read`
-        div.classList.add('hasRead');
-    } else {
-        isRead.textContent = `Mark as read`
-        div.classList.add('hasNotRead');
-    }
-    isRead.addEventListener(`click`, (event) => {
-        if (book.isRead) {
-            isRead.textContent = `Mark as read`
-            book.isRead = false
-            div.classList.add('hasNotRead');
-            div.classList.remove('hasRead');
-        } else {
-            isRead.textContent = `Mark as not read`
-            book.isRead = true
-            div.classList.add('hasRead');
-            div.classList.remove('hasNotRead');
-        }
-     })
-    div.appendChild(isRead);
-    return isRead;
-};
-function makeEdit(div, book) {
-    const edit = document.createElement('button')
-    edit.setAttribute('id', 'edit'); 
-    edit.textContent = `Edit`
-    edit.addEventListener('click', (event) => {
-        savestate();
-        div.remove();
-    })
-    div.appendChild(edit);
-    return edit;
-};
-function makeTile(book) {
-    const div = makeDiv()
-    const title = makeTitle(div, book)
-    const author = makeAuthor(div, book)
-    const pages = makePages(div, book)
-    const isRead = makeIsRead(div, book)
-    const edit = makeEdit(div, book)
-}
-function reset (){
-    title1.value = "";
-    author1.value = "";
-    pages1.value = "";
-    isRead1.checked = false;
-}
-function savestate (div, book) {
-    title1.value = title.textContent;
-    author1.value = author.textContent;
-    pages1.value = pages.textContent;
-}
 submitButton.addEventListener(`click`, (event) => {
-    const book = new books(title1.value, author1.value, pages1.value, isRead1.checked);
-    makeTile(book);
-    reset();
- })
+    resetList()
+})
+function resetList() {
+    for (let i of myLibrary) {
+        const tr = document.getElementById(i.id)
+        tr.remove()
+    }
+    let x=0
+    const books = new book(nTitle.value, nAuthor.value, nPages.value, nRead.checked);
+    myLibrary.push(books)
+    reset()
+    for (let i of myLibrary) {
+        x+=1
+        i.id = x
+        addToLibrary(i);        
+    }
+}
+
+function book(title, author, pages, read) {
+    this.id = 0
+    this.title = title,
+    this.author = author,
+    this.pages = pages,
+    this.read = read
+}
+
+function makeRow(book) {
+    const tr = document.createElement("tr") 
+    tr.setAttribute('id', book.id);
+    table.appendChild(tr)
+    return tr
+}
+function makeIndex(tr, book) {
+    const td = document.createElement("td")
+    td.setAttribute("id", `index${book.id}`)
+    td.innerHTML = book.id
+    tr.appendChild(td)
+
+}
+function makeTitle(tr, book) {
+    const td = document.createElement("td")
+    td.setAttribute("id", `title${book.id}`)
+    td.innerHTML = book.title
+    tr.appendChild(td)
+
+}
+function makeAuthor(tr, book) {
+    const td = document.createElement("td")
+    td.setAttribute("id", `author${book.id}`)
+    td.innerHTML = book.author
+    tr.appendChild(td)
+
+}
+function makePages(tr, book) {
+    const td = document.createElement("td")
+    td.setAttribute("id", `pages${book.id}`)
+    td.innerHTML = book.pages
+    tr.appendChild(td)
+
+}
+function makeRead(tr, book) {
+    const td = document.createElement("td")
+    td.setAttribute("id", `read${book.id}`)
+    td.innerHTML = book.read
+    if (book.read == true) {
+        td.setAttribute("class", `hasRead`)
+    } else {
+        td.setAttribute("class", `notRead`)
+
+    }
+    tr.appendChild(td)
+
+}
+function reset() {
+    nTitle.value = ''
+    nAuthor.value = ''
+    nPages.value = 0
+    nRead.value = false
+}
+function makeEdit(tr, book) {
+    const td = document.createElement("td")
+    const edit = document.createElement("button")
+    edit.innerHTML = "edit"
+    edit.addEventListener(`click`, (event) => {
+        nTitle.value = book.title
+        nAuthor.value = book.author
+        nPages.value = book.pages
+        nRead.checked = book.read
+        tr.remove()
+        myLibrary.splice(myLibrary.indexOf(book), 1)
+        for (let i of myLibrary) {
+            const tr = document.getElementById(i.id)
+            tr.remove()
+        }
+        let x =0
+        for (let i of myLibrary) {
+            x+=1
+            i.id = x
+            addToLibrary(i);        
+        }
+        
+    })
+    td.appendChild(edit)
+    tr.appendChild(td)
+}
+function addToLibrary(book) {
+    const tr = makeRow(book)
+    makeIndex(tr, book)
+    makeTitle(tr, book)
+    makeAuthor(tr, book)
+    makePages(tr, book)
+    makeRead(tr, book)
+    makeEdit(tr, book)
+}
+let x = 0
+for (let i of myLibrary) {
+    x+=1
+    i.id = x
+    addToLibrary(i);        
+}
